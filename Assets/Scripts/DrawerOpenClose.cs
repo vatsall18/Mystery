@@ -13,6 +13,7 @@ public class DrawerOpenClose : MonoBehaviour
     bool isOpen = false;
 
     XRSimpleInteractable simpleInt;
+    Collider col;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class DrawerOpenClose : MonoBehaviour
 
         // Grab our Interactable
         simpleInt = GetComponent<XRSimpleInteractable>();
+        col = GetComponent<Collider>();
         simpleInt.selectEntered.AddListener(OnFirstSelectEntered);
     }
 
@@ -32,12 +34,11 @@ public class DrawerOpenClose : MonoBehaviour
 
     private void OnFirstSelectEntered(SelectEnterEventArgs args)
     {
-        // Toggle open/closed
         isOpen = !isOpen;
         transform.localPosition = isOpen ? openPos : closedPos;
 
-        // If we just opened it, disable further interaction
         if (isOpen)
             simpleInt.enabled = false;
+            col.enabled = false;
     }
 }
