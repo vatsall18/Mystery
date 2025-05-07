@@ -5,7 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 [RequireComponent(typeof(XRSimpleInteractable))]
 public class DrawerOpenClose : MonoBehaviour
 {
-    [Tooltip("How far to slide the drawer out along its local Z")]
     public float openZOffset = 0.2f;
 
     Vector3 closedPos;
@@ -17,11 +16,9 @@ public class DrawerOpenClose : MonoBehaviour
 
     void Awake()
     {
-        // Cache positions
         closedPos = transform.localPosition;
         openPos = closedPos + Vector3.forward * openZOffset;
 
-        // Grab our Interactable
         simpleInt = GetComponent<XRSimpleInteractable>();
         col = GetComponent<Collider>();
         simpleInt.selectEntered.AddListener(OnFirstSelectEntered);
